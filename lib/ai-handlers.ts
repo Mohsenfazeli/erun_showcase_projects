@@ -1,5 +1,5 @@
 /**
- * Server-side logic for the HR Policy Assistant: Gemini first, grounded in the
+ * Server-side logic for the HR Assistant: Gemini first, grounded in the
  * handbook; keyword retrieval as an offline fallback so the demo always answers.
  */
 import { generateJson } from "@/lib/gemini";
@@ -7,7 +7,7 @@ import { scoreText } from "@/lib/retrieval";
 import { ALL_SECTIONS, KB_COMPANY } from "@/data/documents";
 import type { AssistantAnswer, ChatTurn } from "@/lib/ai-types";
 
-const SYSTEM = `You are the HR Policy Assistant for ${KB_COMPANY}, answering questions from employees.
+const SYSTEM = `You are the HR Assistant for ${KB_COMPANY}, answering questions from employees.
 You have been given the company's policy documents. Each section is tagged with an ID like [HB-2.1].
 Rules:
 - Answer ONLY from the documents. Never use outside knowledge, and never guess.

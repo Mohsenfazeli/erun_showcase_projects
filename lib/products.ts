@@ -45,7 +45,7 @@ export const PRODUCTS: Product[] = [
     slug: "assistant",
     number: "03",
     pillar: "AI Implementation",
-    name: "HR Policy Assistant",
+    name: "HR Assistant",
     short: "An AI assistant trained on the company's own policies.",
     tagline: "Ask a question in plain language. The assistant answers only from the company's policy documents and shows exactly where each answer comes from.",
     problem: "Staff can't find answers in long handbooks, so HR answers the same questions all week.",

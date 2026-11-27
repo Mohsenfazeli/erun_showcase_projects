@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Erun Lab",
   },
   description:
-    "Try three working products from Erun Consulting Group, Vancouver: a performance dashboard, an automated monthly report and an AI policy assistant.",
+    "Try three working products from Erun Consulting Group, Vancouver: a performance dashboard, an automated monthly report and an AI HR assistant.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
