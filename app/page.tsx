@@ -26,7 +26,7 @@ export default function LabHome() {
               See It <span className="clarity-word">Working</span>
               <span className="headline-period">.</span>
             </h1>
-            <p>Three working prototypes, one for each thing we do. Choose one to try it.</p>
+            <p>One working prototype for each of our services. Pick one and try it yourself.</p>
           </div>
 
           <nav className="lab-products" aria-label="Lab prototypes">
