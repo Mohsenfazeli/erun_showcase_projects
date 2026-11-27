@@ -3,79 +3,70 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ArrowUpRight, FlaskConical, Menu, X } from "lucide-react";
-import { DEMOS, PILLARS } from "@/lib/demos";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { PRODUCTS } from "@/lib/products";
+import { ErunMark, Wordmark } from "@/components/brand";
 import { cn } from "@/lib/utils";
 
-function Wordmark({ onNavigate }: { onNavigate?: () => void }) {
+function Logo({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <Link href="/" onClick={onNavigate} className="flex items-center gap-2.5 group">
-      <span className="flex size-8 items-center justify-center rounded-lg bg-brand text-white shadow-sm shadow-brand/30 transition group-hover:scale-105">
-        <FlaskConical className="size-4" />
-      </span>
-      <span className="text-[17px] font-semibold tracking-tight text-white">
-        Erun <span className="text-brand-soft/70 font-normal">Lab</span>
+    <Link href="/" onClick={onNavigate} className="flex items-center gap-2.5" aria-label="Erun Lab home">
+      <ErunMark size={30} />
+      <Wordmark className="text-[24px] leading-none" />
+      <span className="ml-0.5 rounded-[4px] border border-line px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-ink-2">
+        Lab
       </span>
     </Link>
   );
 }
 
-function NavContent({ onNavigate }: { onNavigate?: () => void }) {
+function Nav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   return (
     <div className="flex h-full flex-col">
-      <div className="px-5 pt-6 pb-5">
-        <Wordmark onNavigate={onNavigate} />
-        <p className="mt-2 text-xs leading-relaxed text-slate-400">
-          Interactive demos by Erun Consulting Group
-        </p>
+      <div className="px-6 pt-7 pb-8">
+        <Logo onNavigate={onNavigate} />
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-3 pb-4" aria-label="Demos">
-        {PILLARS.map((pillar) => (
-          <div key={pillar} className="mb-5">
-            <p className="px-2 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500">
-              {pillar}
-            </p>
-            <ul className="space-y-0.5">
-              {DEMOS.filter((d) => d.pillar === pillar).map((demo) => {
-                const active = pathname === `/${demo.slug}`;
-                const Icon = demo.icon;
-                return (
-                  <li key={demo.slug}>
-                    <Link
-                      href={`/${demo.slug}`}
-                      onClick={onNavigate}
-                      aria-current={active ? "page" : undefined}
-                      className={cn(
-                        "group flex items-center gap-2.5 rounded-lg px-2 py-2 text-[13px] transition-colors",
-                        active
-                          ? "bg-brand text-white shadow-sm shadow-brand/20"
-                          : "text-slate-300 hover:bg-white/5 hover:text-white",
-                      )}
-                    >
-                      <Icon
-                        className={cn(
-                          "size-4 shrink-0",
-                          active ? "text-white" : "text-slate-500 group-hover:text-slate-300",
-                        )}
-                      />
-                      <span className="leading-snug">{demo.title}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+      <nav className="flex-1 px-3" aria-label="Products">
+        <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-3">Products</p>
+        <ul className="space-y-1">
+          {PRODUCTS.map((p) => {
+            const active = pathname === `/${p.slug}`;
+            return (
+              <li key={p.slug}>
+                <Link
+                  href={`/${p.slug}`}
+                  onClick={onNavigate}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "group relative flex gap-3 rounded-md px-3 py-2.5 transition-colors",
+                    active ? "bg-brand-light" : "hover:bg-canvas",
+                  )}
+                >
+                  {active && <span className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-brand" />}
+                  <span className={cn("pt-px text-[11px] font-bold tabular-nums", active ? "text-brand" : "text-ink-3")}>{p.number}</span>
+                  <span className="min-w-0">
+                    <span className={cn("block text-[13.5px] font-semibold leading-tight", active ? "text-ink" : "text-ink-2 group-hover:text-ink")}>
+                      {p.name}
+                    </span>
+                    <span className="mt-0.5 block text-[11px] text-ink-3">{p.pillar}</span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </nav>
 
-      <div className="border-t border-white/10 px-5 py-4">
+      <div className="m-3 rounded-lg border border-line bg-canvas p-4">
+        <p className="text-[12.5px] font-semibold text-ink">Want this for your business?</p>
+        <p className="mt-1 text-[11.5px] leading-relaxed text-ink-2">Each product here is built on sample data. We build the real thing on yours.</p>
         <a
           href="https://www.erungroup.ca"
-          className="flex items-center gap-1.5 text-xs text-slate-400 transition hover:text-white"
+          className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-brand hover:text-brand-dark"
         >
-          Back to erungroup.ca <ArrowUpRight className="size-3.5" />
+          Visit erungroup.ca <ArrowUpRight className="size-3.5" />
         </a>
       </div>
     </div>
@@ -87,18 +78,16 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop */}
-      <aside className="no-print fixed inset-y-0 left-0 z-30 hidden w-[17.5rem] bg-navy lg:block">
-        <NavContent />
+      <aside className="no-print fixed inset-y-0 left-0 z-30 hidden w-[260px] border-r border-line bg-surface lg:block">
+        <Nav />
       </aside>
 
-      {/* Mobile top bar */}
-      <header className="no-print sticky top-0 z-30 flex h-14 items-center justify-between bg-navy px-4 lg:hidden">
-        <Wordmark />
+      <header className="no-print sticky top-0 z-30 flex h-16 items-center justify-between border-b border-line bg-surface/95 px-4 backdrop-blur lg:hidden">
+        <Logo />
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-lg p-2 text-slate-200 hover:bg-white/10 cursor-pointer"
+          className="rounded-md p-2 text-ink-2 hover:bg-canvas cursor-pointer"
           aria-label="Open menu"
           aria-expanded={open}
         >
@@ -106,25 +95,15 @@ export function Sidebar() {
         </button>
       </header>
 
-      {/* Mobile drawer */}
-      <div
-        className={cn(
-          "no-print fixed inset-0 z-40 lg:hidden transition",
-          open ? "pointer-events-auto" : "pointer-events-none",
-        )}
-        inert={!open}
-      >
+      <div className={cn("no-print fixed inset-0 z-40 lg:hidden", open ? "pointer-events-auto" : "pointer-events-none")} inert={!open}>
         <div
-          className={cn(
-            "absolute inset-0 bg-navy-900/60 backdrop-blur-[2px] transition-opacity duration-200",
-            open ? "opacity-100" : "opacity-0",
-          )}
+          className={cn("absolute inset-0 bg-ink/30 transition-opacity duration-200", open ? "opacity-100" : "opacity-0")}
           onClick={() => setOpen(false)}
         />
         <aside
           className={cn(
-            "absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-navy transition-transform duration-200 ease-out",
-            open ? "translate-x-0 shadow-2xl" : "-translate-x-full",
+            "absolute inset-y-0 left-0 w-[280px] max-w-[85vw] bg-surface transition-transform duration-200 ease-out",
+            open ? "translate-x-0 shadow-xl" : "-translate-x-full",
           )}
           role="dialog"
           aria-label="Navigation"
@@ -132,12 +111,12 @@ export function Sidebar() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute right-3 top-5 rounded-lg p-1.5 text-slate-300 hover:bg-white/10 cursor-pointer"
+            className="absolute right-3 top-6 rounded-md p-1.5 text-ink-2 hover:bg-canvas cursor-pointer"
             aria-label="Close menu"
           >
             <X className="size-5" />
           </button>
-          <NavContent onNavigate={() => setOpen(false)} />
+          <Nav onNavigate={() => setOpen(false)} />
         </aside>
       </div>
     </>

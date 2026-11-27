@@ -1,28 +1,35 @@
-export const COLORS = {
-  brand: "#3268D9",
-  navy: "#14253D",
-  band: "#3268D9",
-  slate: "#94A3B8",
-  grid: "#E2E8F0",
-  teal: "#0F9F94",
-  amber: "#E39B2B",
-  rose: "#D9485F",
-  series: ["#3268D9", "#14253D", "#0F9F94", "#E39B2B", "#8B5CF6", "#94A3B8"],
+export const C = {
+  brand: "#2F69DA",
+  brandDark: "#2455B8",
+  brandLight: "#EAF1FC",
+  sky: "#8FB0EC",
+  ink: "#0F172A",
+  ink2: "#475569",
+  ink3: "#94A3B8",
+  line: "#E2E8F0",
+  soft: "#CBD5E1",
+  up: "#0F8A5F",
+  down: "#C2410C",
 };
 
-export const axisProps = {
-  tick: { fontSize: 11, fill: "#64748B" },
+/** Categorical palette: brand first, then navy, light blue and grey. */
+export const SERIES = [C.brand, C.ink, C.sky, C.soft];
+
+export const axis = {
+  tick: { fontSize: 11, fill: C.ink3, fontFamily: "inherit" },
   tickLine: false,
   axisLine: false,
 } as const;
 
-export const tooltipStyle = {
+export const tooltip = {
   contentStyle: {
-    borderRadius: 10,
-    border: "1px solid #E2E8F0",
-    boxShadow: "0 8px 24px rgba(20,37,61,0.08)",
+    borderRadius: 6,
+    border: `1px solid ${C.line}`,
+    boxShadow: "0 12px 28px rgba(15,23,42,0.08)",
     fontSize: 12,
     padding: "8px 10px",
+    fontFamily: "inherit",
   },
-  labelStyle: { color: "#14253D", fontWeight: 600, marginBottom: 4 },
+  labelStyle: { color: C.ink, fontWeight: 700, marginBottom: 4 },
+  itemStyle: { color: C.ink2, padding: 0 },
 } as const;

@@ -1,48 +1,54 @@
 # Erun Lab
 
-**Erun Lab** is a showcase web app for [Erun Consulting Group](https://www.erungroup.ca), a Vancouver consultancy in data analytics, process automation and AI implementation. It hosts nine small, interactive demos. Each one tackles a common business problem using built-in sample data.
+**Erun Lab** is a showcase web app for [Erun Group](https://www.erungroup.ca), a Vancouver consultancy in data analytics, process automation and AI implementation. It has three working products, one per service. All three run on sample data for one fictional company, **Northwind Coastal Supply** (an outdoor gear retailer in BC and Alberta).
 
-## The demos
+## The products
 
-| Pillar | Demo | Route | What it shows |
-| --- | --- | --- | --- |
-| Data Analytics | Economic & Market Pulse | `/market-pulse` | Region/sector filters, KPI cards, trend charts with a 6-month forecast band, generated summary |
-| Data Analytics | Demand Forecasting Playground | `/forecasting` | Trend + seasonality forecast, confidence band, seasonality chart, what-if sliders, optional CSV upload (parsed in the browser) |
-| Data Analytics | Small Business Site Selector | `/site-selector` | Business type + weighting sliders → ranked neighbourhoods, score breakdown bars, schematic map |
-| Process Automation | Invoice & Receipt Extractor | `/invoice-extractor` | Three sample documents, animated step-by-step extraction, validation flags, CSV/JSON export |
-| Process Automation | Report Automation | `/report-automation` | Raw export → one-click formatted monthly report with KPIs, charts and commentary; print to PDF |
-| Process Automation | Workflow ROI Calculator | `/roi-calculator` | Savings, payback period, 3-year chart and a suggested automation approach |
-| AI Implementation | Chat with Your Documents | `/doc-chat` | Q&A grounded in three sample company documents, with section citations |
-| AI Implementation | Customer Support Triage Agent | `/support-triage` | Category, urgency, sentiment, routing and a drafted reply for a customer email |
-| AI Implementation | Policy & Regulation Explainer | `/policy-explainer` | Plain-language answers on BC business topics, with official links and a "Not legal advice" note |
+| # | Pillar | Product | Route | What it shows |
+| --- | --- | --- | --- | --- |
+| 01 | Data Analytics | Performance Dashboard | `/analytics` | Four KPI cards with sparklines; monthly revenue with a 6-month forecast and 80% range; a revenue-by-channel donut; revenue by region; a gross margin trend; and auto-generated insights. Filters for region and time range. |
+| 02 | Process Automation | Automated Monthly Report | `/reports` | Pick a month and click *Generate*. You get a formatted report with an executive summary, key metrics table, and per-metric commentary covering the current value, year-over-year change, 3-year trend and short-term shift, plus a breakdown and outlook. Prints to PDF. |
+| 03 | AI Implementation | HR Policy Assistant | `/assistant` | A chat assistant that answers only from Northwind's three policy documents (handbook, travel & expenses, IT & security) and cites the exact section. |
 
-All figures, companies and documents are **sample data** and are labelled as such in the app. Nothing shown is a real statistic.
+Every figure, company and document is **sample data** and is labelled as such in the app.
+
+## Brand
+
+The Lab follows erungroup.ca:
+
+- **Typography:** Manrope.
+- **Logo:** the Erun mark and the "erun." wordmark.
+- **Style:** numbered eyebrow labels (`01 / DATA ANALYTICS`) and 6px corners.
+- **Colours:** Primary Blue `#2F69DA`, Dark Blue `#2455B8`, Light Blue `#EAF1FC`, Navy `#0F172A`, Slate `#475569`, Muted Grey `#94A3B8`, Border `#E2E8F0`, Background `#F8FAFC`, White `#FFFFFF`. They are defined as tokens in `app/globals.css`.
 
 ## Tech stack
 
 - Next.js 16 (App Router, TypeScript, Turbopack)
-- Tailwind CSS v4 with shadcn/ui-style components (Radix primitives)
-- Recharts for charts, lucide-react for icons
+- Tailwind CSS v4
+- Recharts and lucide-react
 - Google Gemini via `@google/genai`, called only from the server route `app/api/ai/route.ts`
 
 ## Project structure
 
 ```
 app/
-  layout.tsx            sidebar + main pane
-  page.tsx              Lab home with demo cards
-  <demo>/page.tsx       one folder per demo
-  api/ai/route.ts       shared AI endpoint (mode: doc-chat | triage | policy)
+  page.tsx               Lab home
+  analytics/             01 Performance Dashboard
+  reports/               02 Automated Monthly Report
+  assistant/             03 HR Policy Assistant
+  api/ai/route.ts        assistant endpoint (server only)
 components/
-  sidebar.tsx, demo-header.tsx, chat-shell.tsx, kpi-card.tsx
-  demos/                one client component per demo
-  ui/                   button, card, badge, form controls
-data/                   sample datasets, documents and emails
+  sidebar.tsx, product-header.tsx, brand.tsx
+  products/              dashboard.tsx, report.tsx, assistant.tsx
+data/
+  company.ts             Northwind sample sales (60 months × region × channel)
+  documents.ts           Northwind sample policy documents
 lib/
-  demos.ts              single list of the 9 demos (used by sidebar and home)
-  gemini.ts             Gemini client (server only)
-  ai-handlers.ts        prompts, schemas and offline fallbacks
-  forecast.ts           trend + seasonality forecasting
+  products.ts            the three products (sidebar, home, headers)
+  metrics.ts             aggregation and formatting
+  report.ts              report calculations and written commentary
+  forecast.ts            trend + seasonality forecast
+  gemini.ts, ai-handlers.ts   Gemini client and assistant logic with offline fallback
 ```
 
 ## Run locally
@@ -57,20 +63,23 @@ npm run dev
 
 Open http://localhost:3000.
 
-### AI demos and the Gemini key
+### The AI assistant and the Gemini key
 
 - Get a key from [Google AI Studio](https://aistudio.google.com/apikey) and set `GEMINI_API_KEY` in `.env.local` (locally) or in your Vercel project settings.
-- The default model is `gemini-2.5-flash`. Set `GEMINI_MODEL` to use a different one (for example a newer Flash model).
+- The default model is `gemini-2.5-flash`. Set `GEMINI_MODEL` to use a newer model.
 - The key is only read on the server and is never sent to the browser.
-- **Without a key, or if the API fails or hits a quota, the demos still work.** They fall back to offline responses (keyword search over the sample documents, rule-based triage, pre-written BC topic summaries) and show a small "Demo mode" note.
-- Guardrails: inputs are capped at 2,000 characters, requests are limited to 10 per minute per IP (in memory, per server instance), and system prompts keep each assistant on topic.
+- **Without a key, or if the API fails or hits a quota, the assistant still answers.** It quotes the closest handbook section and shows a small "Offline mode" note.
+- Guardrails:
+  - The system prompt limits answers to the documents, requires citations and declines off-topic questions.
+  - Questions are capped at 1,500 characters.
+  - Each IP is limited to 10 requests per minute (in memory, per server instance).
 
 ## Deploy to Vercel
 
-1. Import this repository in Vercel. It is detected as Next.js; no extra configuration is needed.
+1. Import this repository in Vercel. It is detected as Next.js, with no extra configuration needed.
 2. Add `GEMINI_API_KEY` under **Settings → Environment Variables** (and optionally `GEMINI_MODEL`).
 3. Deploy.
-4. Optional: add a custom domain such as `lab.erungroup.ca`, then link to it from erungroup.ca ("Check out our Lab").
+4. Optional: add a custom domain such as `lab.erungroup.ca` and link it from erungroup.ca.
 
 ## Scripts
 

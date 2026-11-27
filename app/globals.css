@@ -1,37 +1,42 @@
 @import "tailwindcss";
 
+/* Erun brand tokens (match erungroup.ca) */
 :root {
-  --navy: #14253d;
-  --brand: #3268d9;
-  --brand-soft: #e8eefb;
-  --background: #f7f8fa;
-  --foreground: #14253d;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --card: #ffffff;
+  --brand: #2f69da;
+  --brand-dark: #2455b8;
+  --brand-light: #eaf1fc;
+  --ink: #0f172a;
+  --ink-2: #475569;
+  --ink-3: #94a3b8;
+  --line: #e2e8f0;
+  --canvas: #f8fafc;
+  --surface: #ffffff;
 }
 
 @theme inline {
-  --color-navy: var(--navy);
-  --color-navy-900: #0d1829;
-  --color-navy-700: #1f3556;
   --color-brand: var(--brand);
-  --color-brand-600: #2857bc;
-  --color-brand-soft: var(--brand-soft);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-card: var(--card);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-light: var(--brand-light);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
-  --animate-fade-up: fade-up 0.45s ease-out both;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.35s ease-out both;
 
   @keyframes fade-up {
     from {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
@@ -49,17 +54,45 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--canvas);
+  color: var(--ink);
+  font-feature-settings: "ss01", "cv11";
 }
 
 * {
-  border-color: var(--border);
+  border-color: var(--line);
 }
 
-/* Recharts: keep focus outlines tidy */
+::selection {
+  background: var(--brand-light);
+  color: var(--ink);
+}
+
 .recharts-wrapper *:focus {
   outline: none;
+}
+
+/* Thin, quiet scrollbars */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* Editorial eyebrow label, as on erungroup.ca */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+/* Blueprint grid used behind hero areas */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgb(148 163 184 / 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(148 163 184 / 0.14) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -71,6 +104,11 @@ body {
   }
 }
 
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
 @media print {
   .no-print {
     display: none !important;
@@ -78,11 +116,19 @@ body {
   body {
     background: white;
   }
+  main {
+    padding: 0 !important;
+  }
   .print-area {
     box-shadow: none !important;
     border: none !important;
-  }
-  main {
     padding: 0 !important;
+    max-width: none !important;
+  }
+  .print-break {
+    break-before: page;
+  }
+  .avoid-break {
+    break-inside: avoid;
   }
 }
