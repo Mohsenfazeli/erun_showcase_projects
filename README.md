@@ -19,6 +19,7 @@ The Lab is built to read as the website's Lab page, not a separate app:
 - **Same header and footer** as erungroup.ca. The logo and the *Expertise / Approach / About* links go back to the website; *Lab* is shown as the current page; *Book a consultation* opens the website's contact form.
 - **Same CSS.** `app/site.css` is ported from the website's `src/styles.css` (header, footer, eyebrows, page intro, service grid and animated visuals, service blocks, call to action, responsive rules), using the same class names.
 - **Same tokens.** `app/globals.css` uses the website's exact colour values and Manrope (variable font, for its 550/650 weights).
+- **Lab home is one screen**, like the website hero: "See It Working." and three tiles that open each prototype, with no scrolling.
 - **Same page pattern.** Product pages follow the website's service pages: an intro, the live product, a numbered use-case block, links to the other products, and the closing call to action.
 
 When the website's header, footer or styles change, update `components/site-chrome.tsx` and `app/site.css` to match. Set `NEXT_PUBLIC_SITE_URL` to point the header links at a different site (for example a staging site).
