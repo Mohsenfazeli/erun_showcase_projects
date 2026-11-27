@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { ProductHeader } from "@/components/product-header";
+import { ProductPage } from "@/components/product-page";
 import { PolicyAssistant } from "@/components/products/assistant";
 
 export const metadata: Metadata = { title: "HR Policy Assistant" };
 
 export default function Page() {
   return (
-    <>
-      <ProductHeader slug="assistant" />
+    <ProductPage slug="assistant" stage="Try it: ask a question about company policy">
       <PolicyAssistant />
-    </>
+    </ProductPage>
   );
 }

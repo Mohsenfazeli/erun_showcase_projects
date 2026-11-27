@@ -27,7 +27,7 @@ const SECTION_COUNT = DOCUMENTS.reduce((s, d) => s + d.sections.length, 0);
 
 function AssistantAvatar({ className }: { className?: string }) {
   return (
-    <span className={cn("flex size-8 shrink-0 items-center justify-center rounded-md bg-brand text-[11px] font-extrabold text-white", className)}>
+    <span className={cn("flex size-8 shrink-0 items-center justify-center bg-brand text-[11px] font-extrabold text-white", className)}>
       HR
     </span>
   );
@@ -76,7 +76,7 @@ export function PolicyAssistant() {
   return (
     <div className="grid gap-5 animate-fade-up xl:grid-cols-[1fr_320px]" style={{ animationDelay: "80ms" }}>
       {/* Chat */}
-      <section className="flex h-[calc(100dvh-8rem)] min-h-[560px] flex-col overflow-hidden rounded-lg border border-line bg-surface lg:h-[calc(100dvh-6rem)] xl:max-h-[760px]">
+      <section className="flex h-[calc(100dvh-8rem)] min-h-[560px] flex-col overflow-hidden border border-line bg-surface lg:h-[calc(100dvh-6rem)] xl:max-h-[760px]">
         <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5">
           <div className="flex min-w-0 items-center gap-3">
             <AssistantAvatar />
@@ -98,13 +98,13 @@ export function PolicyAssistant() {
           {messages.length === 0 ? (
             <div className="mx-auto max-w-xl animate-fade-in">
               <AssistantAvatar className="size-10 text-[13px]" />
-              <h2 className="mt-5 text-[22px] font-bold tracking-[-0.02em] text-ink">Hi, I&apos;m Northwind&apos;s HR assistant.</h2>
+              <h2 className="mt-5 text-[22px] font-[550] text-ink">Hi, I&apos;m Northwind&apos;s HR assistant.</h2>
               <p className="mt-2 text-[14px] leading-relaxed text-ink-2">
                 Ask me anything about vacation, sick days, travel and expenses, or IT and security. I answer only from {KB_COMPANY}&apos;s
                 policies and show you exactly where each answer comes from.
               </p>
               <p className="mt-7 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-ink-3">Try asking</p>
-              <ul className="mt-2 divide-y divide-line rounded-lg border border-line">
+              <ul className="mt-2 divide-y divide-line border border-line">
                 {STARTER_QUESTIONS.map((q) => (
                   <li key={q}>
                     <button
@@ -123,7 +123,7 @@ export function PolicyAssistant() {
               {messages.map((m, i) =>
                 m.role === "user" ? (
                   <div key={i} className="flex justify-end animate-fade-in">
-                    <p className="max-w-[85%] whitespace-pre-wrap rounded-lg rounded-br-sm bg-ink px-4 py-2.5 text-[14px] text-white">{m.text}</p>
+                    <p className="max-w-[85%] whitespace-pre-wrap rounded-none bg-ink px-4 py-2.5 text-[14px] text-white">{m.text}</p>
                   </div>
                 ) : (
                   <div key={i} className="flex gap-3 animate-fade-up">
@@ -137,7 +137,7 @@ export function PolicyAssistant() {
                             <button
                               key={c.id}
                               onClick={() => showSection(c.id)}
-                              className="inline-flex items-center gap-1 rounded-[4px] border border-line bg-surface px-2 py-1 text-[11.5px] font-medium text-ink-2 transition-colors hover:border-brand/40 hover:text-brand cursor-pointer"
+                              className="inline-flex items-center gap-1 border border-line bg-surface px-2 py-1 text-[11.5px] font-medium text-ink-2 transition-colors hover:border-brand/40 hover:text-brand cursor-pointer"
                               title="Show this section"
                             >
                               <FileText className="size-3" />
@@ -176,7 +176,7 @@ export function PolicyAssistant() {
           }}
           className="border-t border-line p-3 sm:p-4"
         >
-          <div className="mx-auto flex max-w-2xl items-end gap-2 rounded-lg border border-line bg-surface p-1.5 transition focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
+          <div className="mx-auto flex max-w-2xl items-end gap-2 border border-line bg-surface p-1.5 transition focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
             <textarea
               ref={inputRef}
               value={input}
@@ -204,7 +204,7 @@ export function PolicyAssistant() {
 
       {/* Knowledge base */}
       <aside className="space-y-5">
-        <div className="rounded-lg border border-line bg-surface">
+        <div className="border border-line bg-surface">
           <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
             <p className="flex items-center gap-2 text-[13px] font-bold text-ink">
               {viewing ? (
@@ -223,7 +223,7 @@ export function PolicyAssistant() {
               {DOCUMENTS.map((d) => (
                 <li key={d.id}>
                   <button onClick={() => setOpenDoc(d.id)} className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-canvas cursor-pointer">
-                    <span className="flex size-8 items-center justify-center rounded-md bg-brand-light text-brand">
+                    <span className="flex size-8 items-center justify-center bg-brand-light text-brand">
                       <FileText className="size-4" />
                     </span>
                     <span className="min-w-0 flex-1">
@@ -240,7 +240,7 @@ export function PolicyAssistant() {
                 <div
                   id={`sec-${s.id}`}
                   key={s.id}
-                  className={cn("rounded-md px-3 py-2.5 transition-colors", highlight === s.id ? "bg-brand-light ring-1 ring-brand/25" : "")}
+                  className={cn("px-3 py-2.5 transition-colors", highlight === s.id ? "bg-brand-light ring-1 ring-brand/25" : "")}
                 >
                   <p className="text-[12px] font-bold text-ink">
                     <span className="text-brand">{s.id}</span> · {s.heading}
@@ -252,7 +252,7 @@ export function PolicyAssistant() {
           )}
         </div>
 
-        <div className="rounded-lg border border-line bg-surface px-5 py-4">
+        <div className="border border-line bg-surface px-5 py-4">
           <p className="flex items-center gap-2 text-[13px] font-bold text-ink">
             <ShieldCheck className="size-4 text-brand" /> Guardrails
           </p>

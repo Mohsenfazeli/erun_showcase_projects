@@ -3,26 +3,27 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+/** Underlined select, like the website's contact form inputs. */
 export function Select({ className, children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <div className="relative">
       <select
         className={cn(
-          "h-9 w-full appearance-none rounded-md border border-line bg-surface pl-3 pr-9 text-[13px] font-semibold text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20 cursor-pointer",
+          "h-10 w-full appearance-none rounded-none border-0 border-b border-line bg-transparent pr-8 text-[14px] font-semibold text-ink outline-none transition-colors focus:border-brand cursor-pointer",
           className,
         )}
         {...props}
       >
         {children}
       </select>
-      <svg className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-ink-3" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <svg className="pointer-events-none absolute right-1 top-1/2 size-3.5 -translate-y-1/2 text-ink-3" viewBox="0 0 16 16" fill="none" aria-hidden>
         <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </div>
   );
 }
 
-/** Segmented control (pill group) used for filters. */
+/** Text tabs with an underline on the active item, matching the website's nav. */
 export function Segmented<T extends string>({
   value,
   onChange,
@@ -37,7 +38,7 @@ export function Segmented<T extends string>({
   className?: string;
 }) {
   return (
-    <div role="radiogroup" aria-label={label} className={cn("inline-flex rounded-md border border-line bg-surface p-0.5", className)}>
+    <div role="radiogroup" aria-label={label} className={cn("flex items-center gap-5", className)}>
       {options.map((o) => {
         const active = o.value === value;
         return (
@@ -47,8 +48,8 @@ export function Segmented<T extends string>({
             aria-checked={active}
             onClick={() => onChange(o.value)}
             className={cn(
-              "rounded-[5px] px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap",
-              active ? "bg-brand-light text-brand" : "text-ink-2 hover:text-ink",
+              "border-b pb-1.5 text-[12px] font-semibold whitespace-nowrap transition-colors cursor-pointer",
+              active ? "border-brand text-ink" : "border-transparent text-ink-3 hover:text-ink",
             )}
           >
             {o.label}

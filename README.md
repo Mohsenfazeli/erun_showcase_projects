@@ -12,14 +12,16 @@
 
 Every figure, company and document is **sample data** and is labelled as such in the app.
 
-## Brand
+## Looks like part of erungroup.ca
 
-The Lab follows erungroup.ca:
+The Lab is built to read as the website's Lab page, not a separate app:
 
-- **Typography:** Manrope.
-- **Logo:** the Erun mark and the "erun." wordmark.
-- **Style:** numbered eyebrow labels (`01 / DATA ANALYTICS`) and 6px corners.
-- **Colours:** Primary Blue `#2F69DA`, Dark Blue `#2455B8`, Light Blue `#EAF1FC`, Navy `#0F172A`, Slate `#475569`, Muted Grey `#94A3B8`, Border `#E2E8F0`, Background `#F8FAFC`, White `#FFFFFF`. They are defined as tokens in `app/globals.css`.
+- **Same header and footer** as erungroup.ca. The logo and the *Expertise / Approach / About* links go back to the website; *Lab* is shown as the current page; *Book a consultation* opens the website's contact form.
+- **Same CSS.** `app/site.css` is ported from the website's `src/styles.css` (header, footer, eyebrows, page intro, service grid and animated visuals, service blocks, call to action, responsive rules), using the same class names.
+- **Same tokens.** `app/globals.css` uses the website's exact colour values and Manrope (variable font, for its 550/650 weights).
+- **Same page pattern.** Product pages follow the website's service pages: an intro, the live product, a numbered use-case block, links to the other products, and the closing call to action.
+
+When the website's header, footer or styles change, update `components/site-chrome.tsx` and `app/site.css` to match. Set `NEXT_PUBLIC_SITE_URL` to point the header links at a different site (for example a staging site).
 
 ## Tech stack
 
@@ -33,12 +35,15 @@ The Lab follows erungroup.ca:
 ```
 app/
   page.tsx               Lab home
+  site.css               styles ported from erungroup.ca
   analytics/             01 Performance Dashboard
   reports/               02 Automated Monthly Report
   assistant/             03 HR Policy Assistant
   api/ai/route.ts        assistant endpoint (server only)
 components/
-  sidebar.tsx, product-header.tsx, brand.tsx
+  site-chrome.tsx        website header, footer and call to action
+  service-visuals.tsx    the website's animated service visuals
+  product-page.tsx, product-header.tsx, brand.tsx
   products/              dashboard.tsx, report.tsx, assistant.tsx
 data/
   company.ts             Northwind sample sales (60 months × region × channel)

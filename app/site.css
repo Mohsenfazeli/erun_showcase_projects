@@ -1,0 +1,129 @@
+/*
+ * Ported from erungroup.ca (github.com/Mohsenfazeli/erun, src/styles.css) so the Lab
+ * shares the website's header, footer, type scale and layout. Keep class names and
+ * values in step with the website when it changes. Lab-only additions are at the end.
+ */
+
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+::selection { background: var(--primary); color: var(--primary-foreground); }
+.text-primary { color: var(--primary); }
+.erun-site { overflow: clip; }
+
+/* Header */
+.site-header { position: fixed; inset: 0 0 auto; height: 102px; padding: 0 5.2%; display: flex; align-items: center; justify-content: space-between; z-index: 30; background: color-mix(in oklab, var(--background) 88%, transparent); backdrop-filter: blur(16px); }
+.wordmark { font-size: 44px; line-height: 1; font-weight: 800; text-decoration: none; color: var(--foreground); }
+.wordmark span { color: var(--primary); }
+.brand-mark { display: inline-flex; align-items: center; }
+.brand-mark img { display: block; height: 44px; width: auto; }
+.desktop-nav { display: flex; gap: 24px; margin-left: 80px; }
+.desktop-nav a { font-size: 14px; font-weight: 500; }
+.desktop-nav .nav-active { color: var(--foreground); }
+.header-contact { padding: 0 0 9px; height: 32px; font-size: 12px; gap: 28px; }
+.mobile-menu { display: none; }
+
+/* Eyebrows */
+.eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; font-weight: 650; letter-spacing: 0; color: var(--subtle-foreground); text-transform: uppercase; }
+.small-rule { display: block; height: 1px; width: 28px; background: var(--primary); }
+.live-dot { width: 5px; height: 5px; background: var(--primary); border-radius: 50%; display: inline-block; }
+
+/* Inner pages */
+.page-site { min-height: 100svh; display: flex; flex-direction: column; }
+.page-main { flex: 1; padding: 102px 8.2% 0 5.2%; }
+.page-intro { padding: 110px 0 90px; max-width: 760px; }
+.page-intro h1 { font-size: 58px; font-weight: 550; line-height: 1.15; margin: 25px 0 20px; letter-spacing: 0; }
+.page-intro p { font-size: 16px; line-height: 1.8; color: var(--muted-foreground); margin: 0 0 32px; max-width: 560px; }
+.page-intro > a, .page-cta-actions > a:first-child { font-size: 12px; height: 42px; padding: 0 0 10px; gap: 32px; }
+.not-found { min-height: calc(100svh - 300px); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+
+/* Closing call to action */
+.page-cta { border-top: 1px solid var(--border); padding: 80px 0 90px; }
+.page-cta h2 { font-size: 46px; font-weight: 550; line-height: 1.2; margin: 25px 0 18px; }
+.page-cta p { font-size: 14px; line-height: 1.8; color: var(--muted-foreground); margin: 0 0 30px; max-width: 520px; }
+.page-cta-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 36px; }
+.page-cta-email { font-size: 12px; color: var(--muted-foreground); text-decoration: underline; text-underline-offset: 3px; }
+.page-cta-email:hover { color: var(--primary); }
+
+/* Footer */
+.site-footer { display: flex; align-items: center; gap: 28px; border-top: 1px solid var(--border); padding-top: 25px; }
+.site-footer .wordmark { font-size: 30px; }
+.site-footer > span { font-size: 9px; color: var(--subtle-foreground); }
+.site-footer > span:nth-of-type(2) { margin-left: auto; }
+.site-footer.page-footer { position: static; margin: 0 5.2% 30px; }
+.back-top-icon { transform: rotate(-90deg); }
+
+/* Three-column grid with animated visuals (homepage "What We Do") */
+.expertise-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; margin-top: 48px; }
+.expertise-link { display: block; color: inherit; text-decoration: none; }
+.expertise-link:focus-visible { outline: 1px solid var(--primary); outline-offset: 8px; }
+.expertise-link:hover h3 { color: var(--primary); }
+.service-visual { height: 245px; background: var(--visual-surface); position: relative; overflow: hidden; transition: transform 0.5s, box-shadow 0.5s; }
+.expertise-item:hover .service-visual { transform: translateY(-6px); box-shadow: var(--visual-shadow); }
+.visual-topline, .visual-bottomline { display: flex; align-items: center; justify-content: space-between; position: absolute; left: 20px; right: 20px; font-size: 7px; color: var(--subtle-foreground); }
+.visual-topline { top: 20px; }.visual-bottomline { bottom: 20px; font-size: 6px; }
+.analytics-visual svg { position: absolute; left: 20px; top: 53px; width: calc(100% - 40px); height: 147px; overflow: visible; }
+.chart-grid { fill: none; stroke: var(--border); stroke-width: 1; }.chart-secondary { stroke: var(--chart-2); fill: none; stroke-width: 1.5; }.chart-primary { stroke: var(--primary); fill: none; stroke-width: 3; stroke-dasharray: 430; animation: chart-draw 6s ease-in-out infinite; }.chart-point { fill: var(--primary); animation: pulse-point 3s infinite; }
+.service-heading { display: flex; align-items: center; gap: 12px; margin-top: 24px; }.service-heading h3 { font-size: 20px; font-weight: 600; margin: 0; flex: 1; transition: color 0.3s; }.service-index { font-size: 9px; color: var(--subtle-foreground); }.expertise-link > p { font-size: 12px; line-height: 1.7; color: var(--muted-foreground); margin-top: 12px; }
+.workflow-system, .intelligence-system { position: absolute; top: 50%; left: 20px; right: 20px; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; }
+.workflow-node { width: 55px; height: 55px; border: 1px solid var(--border); background: var(--card); display: flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; box-shadow: var(--visual-shadow); }.main-node { border-color: var(--primary); color: var(--primary); }.complete-node { color: var(--primary); }.process-symbol { font-size: 35px; animation: rotate-process 9s linear infinite; }.node-lines { width: 20px; height: 16px; background: repeating-linear-gradient(to bottom,var(--subtle-foreground) 0 1px, transparent 1px 6px); }.flow-track { height: 1px; width: 40px; background: var(--border); position: relative; }.flow-track i { width: 5px; height: 5px; border-radius: 50%; position: absolute; top: -2px; background: var(--primary); animation: flow 3s linear infinite; }
+.input-stack { display: flex; flex-direction: column; gap: 9px; }.input-stack span { height: 15px; width: 31px; background: var(--card); border: 1px solid var(--border); }.intelligence-lines { height: 1px; background: var(--primary); width: 28px; opacity: 0.5; }.intelligence-core { width: 75px; height: 75px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 12px; border: 1px solid var(--primary); transform: rotate(45deg); }.intelligence-core span { background: var(--primary); opacity: 0.5; animation: intelligence 3s infinite alternate; }.intelligence-core span:nth-child(2) { animation-delay: 0.7s; }.intelligence-core span:nth-child(3) { animation-delay: 1.4s; }.output-sheet { width: 40px; height: 58px; background: var(--card); border: 1px solid var(--border); padding: 6px; color: var(--primary); display: flex; flex-direction: column; gap: 5px; }.output-sheet i { width: 23px; height: 1px; background: var(--border); }
+
+/* Service-page blocks */
+.service-block { display: grid; grid-template-columns: 300px 1fr; gap: 60px; border-top: 1px solid var(--border); padding: 70px 0; }
+.service-block-label h2 { font-size: 34px; font-weight: 550; line-height: 1.2; margin: 16px 0 0; }
+.capability-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 44px 56px; }
+.capability-list li { position: relative; border-top: 1px solid var(--border); padding-top: 20px; }
+.capability-list li::before { content: ""; position: absolute; top: -1px; left: 0; width: 28px; height: 1px; background: var(--primary); transition: width 0.6s ease; }
+.capability-list li:hover::before { width: 100%; }
+.capability-list h3 { font-size: 18px; font-weight: 600; margin: 12px 0 10px; }
+.capability-list p { font-size: 13px; line-height: 1.75; color: var(--muted-foreground); margin: 0; }
+.other-services { display: flex; align-items: center; flex-wrap: wrap; gap: 40px; border-top: 1px solid var(--border); padding: 40px 0; }
+.other-services a { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 550; color: var(--foreground); text-decoration: none; transition: color 0.3s; }
+.other-services a:hover { color: var(--primary); }
+
+@keyframes chart-draw { 0% { stroke-dashoffset: 430; } 45%,100% { stroke-dashoffset: 0; } }
+@keyframes pulse-point { 50% { opacity: 0.35; } }
+@keyframes rotate-process { to { transform: rotate(360deg); } }
+@keyframes flow { from { left: 0; opacity: 0; } 20% { opacity: 1; } to { left: 100%; opacity: 0; } }
+@keyframes intelligence { to { opacity: 1; } }
+
+@media (min-width: 1500px) { .service-visual { height: 300px; }.analytics-visual svg { top: 75px; height: 170px; } }
+@media (max-width: 1050px) {
+  .expertise-grid { gap: 18px; }.service-heading h3 { font-size: 16px; }.service-heading { gap: 7px; }.service-index { display: none; }
+  .service-block { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 700px) {
+  .site-header { height: 80px; padding: 0 7%; }.wordmark { font-size: 36px; }.brand-mark img { height: 36px; }.header-contact { margin-left: auto; margin-right: 20px; font-size: 10px; gap: 12px; }.mobile-menu { display: inline-flex; }.desktop-nav { display: none; }.desktop-nav.open { display: flex; position: absolute; top: 80px; left: 0; right: 0; margin: 0; background: var(--background); padding: 20px 7%; border-bottom: 1px solid var(--border); justify-content: space-between; gap: 0; }
+  .eyebrow { font-size: 8px; }
+  .page-main { padding: 80px 8% 0; }.page-intro { padding: 70px 0 60px; }.page-intro h1 { font-size: 38px; margin: 20px 0 15px; }.page-intro p { font-size: 13px; }
+  .not-found { min-height: calc(100svh - 280px); }.page-cta { padding: 56px 0 64px; }.page-cta h2 { font-size: 32px; margin: 20px 0 14px; }.page-cta p { font-size: 12px; }.page-cta-actions { gap: 22px; }
+  .site-footer.page-footer { margin: 0 8% 25px; gap: 16px; flex-wrap: wrap; }.site-footer > span:first-of-type { font-size: 8px; max-width: 210px; }.site-footer > span:nth-of-type(2) { margin-left: 0; width: calc(100% - 50px); font-size: 8px; }.site-footer button { margin-left: auto; }
+  .expertise-grid { grid-template-columns: 1fr; gap: 35px; margin-top: 28px; }.service-visual { height: 210px; }.service-heading { margin-top: 16px; }.service-heading h3 { font-size: 20px; }.service-index { display: block; }.expertise-link > p { font-size: 11px; }
+  .service-block { gap: 26px; padding: 48px 0; }.service-block-label h2 { font-size: 28px; }.capability-list { grid-template-columns: 1fr; gap: 30px; }
+  .other-services { flex-direction: column; align-items: flex-start; gap: 18px; padding: 32px 0; }.other-services a { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ---------- Lab additions (same visual language) ---------- */
+
+/* Compact intro used above each live product */
+.lab-intro { padding: 90px 0 56px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; }
+.lab-intro h1 { font-size: 58px; font-weight: 550; line-height: 1.15; margin: 25px 0 20px; letter-spacing: 0; }
+.lab-intro p { font-size: 16px; line-height: 1.8; color: var(--muted-foreground); margin: 0; max-width: 620px; }
+.lab-intro-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; font-size: 10px; font-weight: 650; color: var(--subtle-foreground); text-transform: uppercase; }
+
+/* The live product area */
+.lab-stage { padding-bottom: 90px; }
+.lab-stage-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--border); padding: 18px 0 26px; font-size: 10px; font-weight: 650; color: var(--subtle-foreground); text-transform: uppercase; }
+.lab-stage-bar > span { display: inline-flex; align-items: center; gap: 9px; }
+
+@media (min-width: 1500px) { .lab-intro h1, .page-intro h1 { font-size: 72px; } }
+@media (max-width: 1050px) { .lab-intro h1 { font-size: 46px; } }
+@media (max-width: 700px) {
+  .lab-intro { grid-template-columns: 1fr; padding: 60px 0 36px; gap: 22px; }
+  .lab-intro h1 { font-size: 38px; margin: 20px 0 15px; }
+  .lab-intro p { font-size: 13px; }
+  .lab-intro-meta { align-items: flex-start; font-size: 8px; }
+  .lab-stage { padding-bottom: 56px; }
+  .lab-stage-bar { font-size: 8px; padding: 14px 0 20px; }
+}

@@ -128,7 +128,7 @@ export function AutomatedReport() {
     <div className="space-y-6 animate-fade-up" style={{ animationDelay: "80ms" }}>
       {/* Control panel */}
       <div className="no-print grid gap-4 lg:grid-cols-[1fr_320px]">
-        <div className="rounded-lg border border-line bg-surface p-5">
+        <div className="border border-line bg-surface p-5">
           <div className="flex flex-wrap items-end gap-3">
             <div className="w-full sm:w-56">
               <label htmlFor="month" className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-3">
@@ -161,7 +161,7 @@ export function AutomatedReport() {
                 <li
                   key={s}
                   className={cn(
-                    "flex items-center gap-2 rounded-md border px-2.5 py-2 text-[11.5px] font-medium transition-colors",
+                    "flex items-center gap-2 border px-2.5 py-2 text-[11.5px] font-medium transition-colors",
                     done ? "border-brand/20 bg-brand-light text-ink" : active ? "border-brand/40 text-ink" : "border-line text-ink-3",
                   )}
                 >
@@ -175,7 +175,7 @@ export function AutomatedReport() {
           </ol>
         </div>
 
-        <div className="rounded-lg border border-line bg-surface p-5 text-[12.5px]">
+        <div className="border border-line bg-surface p-5 text-[12.5px]">
           <p className="flex items-center gap-2 font-semibold text-ink">
             <Database className="size-4 text-brand" /> Data source
           </p>
@@ -190,7 +190,7 @@ export function AutomatedReport() {
       </div>
 
       {stage === "idle" && (
-        <div className="no-print flex flex-col items-center rounded-lg border border-dashed border-line bg-surface px-6 py-16 text-center">
+        <div className="no-print flex flex-col items-center border border-dashed border-line bg-surface px-6 py-16 text-center">
           <FileText className="size-8 text-ink-3" />
           <p className="mt-3 text-[15px] font-bold text-ink">No report generated yet</p>
           <p className="mt-1 max-w-sm text-[13px] text-ink-2">
@@ -202,13 +202,13 @@ export function AutomatedReport() {
       {/* The report document */}
       {report && (
         <div ref={reportRef} className={cn("scroll-mt-6 transition-opacity", stage === "running" && "opacity-40")}>
-          <article className="print-area mx-auto max-w-[880px] rounded-lg border border-line bg-surface shadow-[0_20px_50px_-20px_rgba(15,23,42,0.18)] animate-fade-up">
-            <div className="h-1 rounded-t-lg bg-brand" />
+          <article className="print-area mx-auto max-w-[880px] border border-line bg-surface shadow-[0_20px_50px_-20px_rgba(15,23,42,0.18)] animate-fade-up">
+            <div className="h-1 bg-brand" />
             <div className="px-6 py-8 sm:px-12 sm:py-11">
               {/* Letterhead */}
               <header className="flex flex-wrap items-start justify-between gap-6">
                 <div className="flex items-center gap-3">
-                  <span className="flex size-11 items-center justify-center rounded-md bg-ink text-[14px] font-extrabold text-white">NC</span>
+                  <span className="flex size-11 items-center justify-center bg-ink text-[14px] font-extrabold text-white">NC</span>
                   <div>
                     <p className="text-[14px] font-bold text-ink">{COMPANY.name}</p>
                     <p className="text-[11.5px] text-ink-2">{COMPANY.description}</p>
@@ -225,7 +225,7 @@ export function AutomatedReport() {
 
               <div className="mt-10">
                 <p className="eyebrow">Monthly performance report</p>
-                <h2 className="mt-2 text-[34px] font-bold leading-tight tracking-[-0.025em] text-ink">{report.month}</h2>
+                <h2 className="mt-2 text-[34px] font-[550] leading-tight text-ink">{report.month}</h2>
               </div>
 
               {/* 01 Executive summary */}
@@ -237,7 +237,7 @@ export function AutomatedReport() {
                     <li
                       key={t.text}
                       className={cn(
-                        "rounded-md border-l-[3px] bg-canvas px-3.5 py-3 text-[12.5px] leading-relaxed text-ink",
+                        "border-l-[3px] bg-canvas px-3.5 py-3 text-[12.5px] leading-relaxed text-ink",
                         t.tone === "positive" ? "border-emerald-600" : t.tone === "watch" ? "border-orange-600" : "border-brand",
                       )}
                     >
