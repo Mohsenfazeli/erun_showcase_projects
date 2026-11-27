@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { ProductHeader } from "@/components/product-header";
+import { ProductPage } from "@/components/product-page";
 import { AutomatedReport } from "@/components/products/report";
 
 export const metadata: Metadata = { title: "Automated Monthly Report" };
 
 export default function Page() {
   return (
-    <>
-      <ProductHeader slug="reports" />
+    <ProductPage slug="reports" stage="Try it: pick a month and generate the report">
       <AutomatedReport />
-    </>
+    </ProductPage>
   );
 }

@@ -153,9 +153,9 @@ export function Dashboard() {
   return (
     <div className="space-y-5 animate-fade-up" style={{ animationDelay: "80ms" }}>
       {/* Toolbar */}
-      <div className="flex flex-col gap-3 rounded-lg border border-line bg-surface px-4 py-3 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 border border-line bg-surface px-4 py-3 md:flex-row md:items-center md:justify-between">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-ink text-[13px] font-extrabold text-white">NC</span>
+          <span className="flex size-9 shrink-0 items-center justify-center bg-ink text-[13px] font-extrabold text-white">NC</span>
           <div className="min-w-0">
             <p className="truncate text-[13.5px] font-bold text-ink">{COMPANY.name}</p>
             <p className="truncate text-[11.5px] text-ink-2">
@@ -242,7 +242,7 @@ export function Dashboard() {
             <div className="mt-3 flex flex-wrap gap-5 text-[11px] text-ink-2">
               <span className="flex items-center gap-1.5"><span className="h-0.5 w-4 bg-ink" /> Actual</span>
               <span className="flex items-center gap-1.5"><span className="w-4 border-t-2 border-dashed border-brand" /> Forecast</span>
-              <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 rounded-[2px] bg-brand/15" /> 80% range</span>
+              <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 bg-brand/15" /> 80% range</span>
             </div>
           </CardBody>
         </Card>
@@ -269,7 +269,7 @@ export function Dashboard() {
             <ul className="mt-5 divide-y divide-line">
               {mix.map((m) => (
                 <li key={m.name} className="flex items-center gap-3 py-2.5 text-[13px]">
-                  <span className="size-2.5 rounded-[3px]" style={{ background: m.color }} />
+                  <span className="size-2.5" style={{ background: m.color }} />
                   <span className="flex-1 font-medium text-ink">{m.name}</span>
                   <span className="tabular-nums text-ink-2">{m.share.toFixed(0)}%</span>
                   <Delta value={m.yoy} text={fmtChange("revenue", m.yoy)} className="w-[62px] justify-center" />
@@ -342,7 +342,7 @@ export function Dashboard() {
             <ul className="space-y-3.5">
               {insights.map((t, i) => (
                 <li key={`${region}-${i}`} className="flex gap-3 text-[13px] leading-relaxed text-ink animate-fade-in">
-                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-[4px] bg-brand-light text-brand">
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center bg-brand-light text-brand">
                     {i === 0 ? <Lightbulb className="size-3" /> : <span className="text-[10px] font-bold">{i + 1}</span>}
                   </span>
                   {t}

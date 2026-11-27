@@ -3,22 +3,24 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+/** Same variants as the website's button, including "editorial" and "nav". */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[13px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-brand text-white hover:bg-brand-dark",
-        ink: "bg-ink text-white hover:bg-ink/90",
-        outline: "border border-line bg-surface text-ink hover:border-ink-3 hover:bg-canvas",
-        ghost: "text-ink-2 hover:bg-canvas hover:text-ink",
-        soft: "bg-brand-light text-brand hover:text-brand-dark",
+        default: "rounded-none bg-brand text-white hover:bg-brand-dark",
+        outline: "rounded-none border border-line bg-surface text-ink hover:border-ink",
+        ghost: "rounded-none text-ink-2 hover:text-ink",
+        editorial: "rounded-none border-b border-ink bg-transparent text-ink hover:text-brand hover:border-brand shadow-none",
+        nav: "rounded-none bg-transparent text-ink-2 hover:text-ink shadow-none",
       },
       size: {
-        default: "h-9 px-4",
+        default: "h-9 px-4 py-2",
         sm: "h-8 px-3 text-xs",
-        lg: "h-11 px-5",
-        icon: "size-9",
+        lg: "h-11 px-6",
+        icon: "h-9 w-9",
+        bare: "",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

@@ -1,81 +1,82 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { PageShell } from "@/components/site-chrome";
+import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
+import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/lib/products";
-import { ErunMark } from "@/components/brand";
 
-export default function Home() {
+const VISUALS = {
+  analytics: <AnalyticsVisual label="DASHBOARD / LIVE" />,
+  reports: <WorkflowVisual label="REPORT / AUTOMATED" />,
+  assistant: <AIVisual label="ASSISTANT / GROUNDED" />,
+} as const;
+
+const HOW = [
+  { title: "Real products, not slides", text: "Each one is a working tool you can use right now, built the way we build for clients." },
+  { title: "One fictional company", text: "All three run on sample data for Northwind Coastal Supply, an outdoor gear retailer." },
+  { title: "Your data next", text: "In a real project, we connect the same approach to your own systems and documents." },
+];
+
+export default function LabHome() {
   return (
-    <div>
-      <section className="relative overflow-hidden rounded-xl border border-line bg-surface animate-fade-up">
-        <div aria-hidden className="grid-bg absolute inset-0 [mask-image:linear-gradient(to_left,black,transparent_70%)]" />
-        <div className="relative grid gap-8 px-6 py-10 sm:px-10 sm:py-14 md:grid-cols-[1fr_auto] md:items-center">
-          <div className="max-w-xl">
-            <p className="eyebrow">Erun Lab</p>
-            <h1 className="mt-4 text-[34px] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-[46px]">
-              See the work, not just the pitch<span className="text-brand">.</span>
-            </h1>
-            <p className="mt-5 text-[15.5px] leading-relaxed text-ink-2">
-              Three working products, one for each thing we do: data analytics, process automation and AI implementation. They all run on
-              sample data for a fictional retailer, Northwind Coastal Supply, so you can see what each one would do with your own numbers.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/analytics"
-                className="inline-flex h-11 items-center gap-2 rounded-md bg-brand px-5 text-[13px] font-semibold text-white transition-colors hover:bg-brand-dark"
-              >
-                Start with the dashboard <ArrowRight className="size-4" />
+    <PageShell>
+      <section className="page-intro animate-fade-up">
+        <div className="eyebrow">
+          <span className="small-rule" /> Erun Lab
+        </div>
+        <h1>
+          See It Working<span className="text-primary">.</span>
+        </h1>
+        <p>
+          Three working products, one for each thing we do: data analytics, automation and AI implementation. Open one, try it, and picture it
+          running on your own numbers.
+        </p>
+        <Button variant="editorial" size="bare" asChild>
+          <a href="#products">
+            Explore the products <ArrowDown />
+          </a>
+        </Button>
+      </section>
+
+      <section id="products" className="scroll-mt-28 border-t border-line pt-14 pb-24" aria-labelledby="products-title">
+        <div className="eyebrow">01 / The products</div>
+        <h2 id="products-title" className="mt-6 text-[46px] font-[550] leading-[1.2] max-md:text-[32px]">
+          Try Them Yourself<span className="text-primary">.</span>
+        </h2>
+        <div className="expertise-grid">
+          {PRODUCTS.map((p) => (
+            <article className="expertise-item" key={p.slug}>
+              <Link href={`/${p.slug}`} className="expertise-link">
+                {VISUALS[p.slug as keyof typeof VISUALS]}
+                <div className="service-heading">
+                  <span className="service-index">{p.number}</span>
+                  <h3>{p.name}</h3>
+                  <ArrowUpRight size={20} />
+                </div>
+                <p>
+                  <span className="font-semibold text-ink">{p.pillar}.</span> {p.short}
+                </p>
               </Link>
-              <a
-                href="https://www.erungroup.ca"
-                className="inline-flex h-11 items-center gap-2 rounded-md border border-line bg-surface px-5 text-[13px] font-semibold text-ink transition-colors hover:border-ink-3"
-              >
-                About Erun <ArrowUpRight className="size-4" />
-              </a>
-            </div>
-          </div>
-          <div className="hidden justify-center md:flex">
-            <ErunMark size={180} className="drop-shadow-[0_24px_40px_rgba(47,105,218,0.25)]" />
-          </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="mt-10">
-        <div className="flex items-end justify-between gap-4 border-b border-line pb-4">
-          <h2 className="text-[18px] font-bold tracking-tight text-ink">The products</h2>
-          <p className="text-xs text-ink-3">03 products · sample data</p>
+      <section className="service-block" aria-labelledby="how-title">
+        <div className="service-block-label">
+          <span className="eyebrow">About the Lab</span>
+          <h2 id="how-title">How it works</h2>
         </div>
-        <ol className="divide-y divide-line">
-          {PRODUCTS.map((p, i) => {
-            const Icon = p.icon;
-            return (
-              <li key={p.slug} className="animate-fade-up" style={{ animationDelay: `${120 + i * 90}ms` }}>
-                <Link
-                  href={`/${p.slug}`}
-                  className="group grid gap-4 py-7 sm:grid-cols-[72px_1fr_auto] sm:items-center"
-                >
-                  <span className="text-[13px] font-bold tabular-nums text-ink-3 transition-colors group-hover:text-brand">{p.number}</span>
-                  <div className="min-w-0">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">{p.pillar}</p>
-                    <h3 className="mt-1.5 flex items-center gap-2.5 text-[22px] font-bold tracking-[-0.02em] text-ink">
-                      <Icon className="size-5 text-ink-3 transition-colors group-hover:text-brand" />
-                      {p.name}
-                    </h3>
-                    <p className="mt-1.5 max-w-2xl text-[14px] leading-relaxed text-ink-2">{p.tagline} {p.value}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink transition-colors group-hover:text-brand">
-                    Open <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
+        <ol className="capability-list">
+          {HOW.map((item, i) => (
+            <li key={item.title}>
+              <span className="service-index">0{i + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))}
         </ol>
       </section>
-
-      <footer className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-[11.5px] text-ink-3">
-        <span>Data Analytics · Automation · AI Implementation</span>
-        <span>All figures are sample data for a fictional company. © {new Date().getFullYear()} Erun Group</span>
-      </footer>
-    </div>
+    </PageShell>
   );
 }

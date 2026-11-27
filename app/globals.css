@@ -1,42 +1,49 @@
 @import "tailwindcss";
 
-/* Erun brand tokens (match erungroup.ca) */
+/*
+ * Erun brand tokens. Names mirror erungroup.ca (shadcn variables) so the
+ * website's own CSS in site.css works unchanged; values are the brand palette.
+ */
 :root {
-  --brand: #2f69da;
-  --brand-dark: #2455b8;
-  --brand-light: #eaf1fc;
-  --ink: #0f172a;
-  --ink-2: #475569;
-  --ink-3: #94a3b8;
-  --line: #e2e8f0;
-  --canvas: #f8fafc;
-  --surface: #ffffff;
+  --radius: 0.375rem;
+  /* Exact values from erungroup.ca src/styles.css (brand: #2F69DA, #0F172A, #F8FAFC ...) */
+  --background: oklch(0.985 0.003 250);
+  --foreground: oklch(0.263 0.049 256);
+  --card: oklch(1 0 0);
+  --primary: oklch(0.548 0.184 262);
+  --primary-dark: #2455b8;
+  --primary-foreground: oklch(1 0 0);
+  --accent: oklch(0.933 0.018 255);
+  --muted-foreground: oklch(0.584 0.027 254);
+  --subtle-foreground: oklch(0.584 0.027 254);
+  --border: oklch(0.902 0.013 250);
+  --chart-2: oklch(0.76 0.09 252);
+  --scene-grid: oklch(0.84 0.014 255 / 0.38);
+  --visual-surface: oklch(0.951 0.015 255);
+  --visual-shadow: 0 16px 35px oklch(0.263 0.049 256 / 0.07);
 }
 
 @theme inline {
-  --color-brand: var(--brand);
-  --color-brand-dark: var(--brand-dark);
-  --color-brand-light: var(--brand-light);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-line: var(--line);
-  --color-canvas: var(--canvas);
-  --color-surface: var(--surface);
+  --color-brand: var(--primary);
+  --color-brand-dark: var(--primary-dark);
+  --color-brand-light: var(--accent);
+  --color-ink: var(--foreground);
+  --color-ink-2: var(--muted-foreground);
+  --color-ink-3: var(--subtle-foreground);
+  --color-line: var(--border);
+  --color-canvas: var(--background);
+  --color-surface: var(--card);
+  --color-visual: var(--visual-surface);
+  --color-primary: var(--primary);
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.625rem;
-
-  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.35s ease-out both;
 
   @keyframes fade-up {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -53,55 +60,25 @@
   }
 }
 
-body {
-  background: var(--canvas);
-  color: var(--ink);
-  font-feature-settings: "ss01", "cv11";
-}
-
-* {
-  border-color: var(--line);
-}
-
-::selection {
-  background: var(--brand-light);
-  color: var(--ink);
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+  }
 }
 
 .recharts-wrapper *:focus {
   outline: none;
 }
 
-/* Thin, quiet scrollbars */
 .thin-scroll {
   scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
-}
-
-/* Editorial eyebrow label, as on erungroup.ca */
-.eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand);
-}
-
-/* Blueprint grid used behind hero areas */
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgb(148 163 184 / 0.14) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(148 163 184 / 0.14) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  scrollbar-color: var(--border) transparent;
 }
 
 @page {
@@ -116,7 +93,7 @@ body {
   body {
     background: white;
   }
-  main {
+  .page-main {
     padding: 0 !important;
   }
   .print-area {
