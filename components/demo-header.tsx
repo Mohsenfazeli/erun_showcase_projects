@@ -7,7 +7,7 @@ export function DemoHeader({ slug }: { slug: string }) {
   if (!demo) return null;
   const Icon = demo.icon;
   return (
-    <header className="mb-6 animate-fade-up">
+    <header className="no-print mb-6 animate-fade-up">
       <div className="flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.12em] text-brand">
         {demo.pillar}
       </div>
