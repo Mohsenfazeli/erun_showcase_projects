@@ -2,21 +2,31 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("rounded-xl border border-border bg-card shadow-[0_1px_2px_rgba(20,37,61,0.04)]", className)} {...props} />;
+  return <div className={cn("rounded-lg border border-line bg-surface", className)} {...props} />;
 }
 
-export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("flex flex-col gap-1 p-5 pb-3", className)} {...props} />;
+export function CardHeader({
+  title,
+  subtitle,
+  action,
+  className,
+}: {
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  action?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex flex-wrap items-start justify-between gap-3 px-5 pt-5", className)}>
+      <div className="min-w-0">
+        <h3 className="text-[14px] font-bold tracking-tight text-ink">{title}</h3>
+        {subtitle && <p className="mt-0.5 text-xs text-ink-2">{subtitle}</p>}
+      </div>
+      {action}
+    </div>
+  );
 }
 
-export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("text-sm font-semibold text-navy", className)} {...props} />;
-}
-
-export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-xs text-muted", className)} {...props} />;
-}
-
-export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-5 pt-0", className)} {...props} />;
+export function CardBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-5", className)} {...props} />;
 }

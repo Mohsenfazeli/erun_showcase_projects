@@ -4,20 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[13px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer",
   {
     variants: {
       variant: {
-        default: "bg-brand text-white shadow-sm hover:bg-brand-600",
-        navy: "bg-navy text-white shadow-sm hover:bg-navy-700",
-        outline: "border border-border bg-white text-navy hover:bg-slate-50",
-        ghost: "text-navy hover:bg-slate-100",
-        soft: "bg-brand-soft text-brand hover:bg-brand/15",
+        default: "bg-brand text-white hover:bg-brand-dark",
+        ink: "bg-ink text-white hover:bg-ink/90",
+        outline: "border border-line bg-surface text-ink hover:border-ink-3 hover:bg-canvas",
+        ghost: "text-ink-2 hover:bg-canvas hover:text-ink",
+        soft: "bg-brand-light text-brand hover:text-brand-dark",
       },
       size: {
         default: "h-9 px-4",
         sm: "h-8 px-3 text-xs",
-        lg: "h-11 px-6",
+        lg: "h-11 px-5",
         icon: "size-9",
       },
     },
@@ -35,5 +35,3 @@ export function Button({ className, variant, size, asChild = false, ...props }: 
   const Comp = asChild ? Slot : "button";
   return <Comp className={cn(buttonVariants({ variant, size, className }))} {...props} />;
 }
-
-export { buttonVariants };

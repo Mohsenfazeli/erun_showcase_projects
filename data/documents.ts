@@ -1,5 +1,5 @@
 /**
- * SAMPLE DOCUMENTS for a fictional company, "Harbourview Analytics Inc."
+ * SAMPLE DOCUMENTS for the fictional company "Northwind Coastal Supply"
  * Written for the demo; not real policies.
  */
 
@@ -15,7 +15,7 @@ export interface CompanyDoc {
   sections: DocSection[];
 }
 
-export const DOC_COMPANY = "Harbourview Analytics Inc. (fictional)";
+export const KB_COMPANY = "Northwind Coastal Supply";
 
 export const DOCUMENTS: CompanyDoc[] = [
   {
@@ -51,7 +51,7 @@ export const DOCUMENTS: CompanyDoc[] = [
     sections: [
       { id: "IT-1.1", heading: "Equipment", text: "Each employee receives a company laptop, refreshed every three years. A one-time home office allowance of $600 is available for monitors, chairs and accessories." },
       { id: "IT-1.2", heading: "Passwords and MFA", text: "Use the company password manager for all work accounts. Multi-factor authentication is mandatory for email, the HR portal and all client systems. Never share passwords, even with IT staff." },
-      { id: "IT-2.1", heading: "Lost or stolen devices", text: "Report a lost or stolen device to the IT help desk within one hour at helpdesk@harbourview.example or by calling the IT line. IT will remotely lock and wipe the device." },
+      { id: "IT-2.1", heading: "Lost or stolen devices", text: "Report a lost or stolen device to the IT help desk within one hour at helpdesk@northwind.example or by calling the IT line. IT will remotely lock and wipe the device." },
       { id: "IT-2.2", heading: "Public Wi-Fi", text: "When working from cafés, airports or hotels, always connect through the company VPN. Do not work with client data on shared or public computers." },
       { id: "IT-3.1", heading: "AI tools", text: "Only company-approved AI tools may be used with internal or client information. Never paste client data, personal information or source code into public AI chatbots." },
     ],
@@ -61,9 +61,9 @@ export const DOCUMENTS: CompanyDoc[] = [
 export const ALL_SECTIONS = DOCUMENTS.flatMap((d) => d.sections.map((s) => ({ ...s, docId: d.id, docTitle: d.title })));
 
 export const STARTER_QUESTIONS = [
-  "How many vacation days do I get after 4 years?",
-  "What's the hotel limit in Toronto?",
+  "I've been here 4 years. How much vacation do I get?",
+  "What's the hotel limit for a trip to Toronto?",
   "How long do I have to submit an expense claim?",
   "I lost my laptop at the airport. What should I do?",
-  "Can I use ChatGPT with client data?",
+  "Can I use ChatGPT with customer data?",
 ];
