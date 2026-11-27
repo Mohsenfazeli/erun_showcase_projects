@@ -60,7 +60,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
                           active ? "text-white" : "text-slate-500 group-hover:text-slate-300",
                         )}
                       />
-                      <span className="truncate">{demo.title}</span>
+                      <span className="leading-snug">{demo.title}</span>
                     </Link>
                   </li>
                 );
@@ -88,7 +88,7 @@ export function Sidebar() {
   return (
     <>
       {/* Desktop */}
-      <aside className="no-print fixed inset-y-0 left-0 z-30 hidden w-64 bg-navy lg:block">
+      <aside className="no-print fixed inset-y-0 left-0 z-30 hidden w-[17.5rem] bg-navy lg:block">
         <NavContent />
       </aside>
 
