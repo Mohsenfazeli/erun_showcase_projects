@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-chrome";
-import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
+import { AssistantVisual, DashboardVisual, ReportVisual } from "@/components/lab-visuals";
 import { PRODUCTS } from "@/lib/products";
 
 const VISUALS = {
-  analytics: <AnalyticsVisual label="DASHBOARD / LIVE" />,
-  reports: <WorkflowVisual label="REPORT / AUTOMATED" />,
-  assistant: <AIVisual label="ASSISTANT / GROUNDED" />,
+  analytics: <DashboardVisual />,
+  reports: <ReportVisual />,
+  assistant: <AssistantVisual />,
 } as const;
 
 /** The Lab is a single screen, like the website's hero: a headline and three ways in. */
