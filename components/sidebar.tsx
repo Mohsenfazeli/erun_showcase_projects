@@ -112,7 +112,7 @@ export function Sidebar() {
           "no-print fixed inset-0 z-40 lg:hidden transition",
           open ? "pointer-events-auto" : "pointer-events-none",
         )}
-        aria-hidden={!open}
+        inert={!open}
       >
         <div
           className={cn(
@@ -123,8 +123,8 @@ export function Sidebar() {
         />
         <aside
           className={cn(
-            "absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-navy shadow-2xl transition-transform duration-200 ease-out",
-            open ? "translate-x-0" : "-translate-x-full",
+            "absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-navy transition-transform duration-200 ease-out",
+            open ? "translate-x-0 shadow-2xl" : "-translate-x-full",
           )}
           role="dialog"
           aria-label="Navigation"
