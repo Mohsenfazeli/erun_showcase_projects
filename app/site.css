@@ -175,3 +175,88 @@ body { margin: 0; }
   .section-counter { font-size: 8px; }
   .lab-hide-mobile { display: none; }
 }
+
+/* ---------- Lab prototype previews (components/lab-visuals.tsx) ---------- */
+.lab-visual .lab-svg { position: absolute; left: 20px; right: 20px; top: 38px; bottom: 34px; width: calc(100% - 40px); height: calc(100% - 72px); overflow: visible; font-family: inherit; }
+.lv-seq, .lv-grow, .lv-flow, .lv-typing-dot { transform-box: fill-box; }
+.lv-card { fill: var(--card); stroke: var(--border); stroke-width: 1; }
+.lv-grid { stroke: var(--border); stroke-width: 1; }
+.lv-label { font-size: 6.5px; font-weight: 650; fill: var(--muted-foreground); letter-spacing: 0.04em; }
+.lv-value { font-size: 14px; font-weight: 600; fill: var(--foreground); }
+.lv-value-sm { font-size: 9px; font-weight: 600; fill: var(--foreground); }
+.lv-pill-up { fill: oklch(0.95 0.05 160); }
+.lv-pill-down { fill: oklch(0.95 0.04 50); }
+.lv-pill-text-up { font-size: 6px; font-weight: 700; fill: oklch(0.5 0.12 160); }
+.lv-pill-text-down { font-size: 6px; font-weight: 700; fill: oklch(0.55 0.15 45); }
+.lv-today { stroke: var(--muted-foreground); stroke-width: 0.8; stroke-dasharray: 2 2; opacity: 0.6; }
+.lv-actual { fill: none; stroke: var(--foreground); stroke-width: 1.6; stroke-linejoin: round; }
+.lv-forecast { fill: none; stroke: var(--primary); stroke-width: 1.8; stroke-dasharray: 4 3; }
+.lv-band { fill: var(--primary); fill-opacity: 0.12; }
+.lv-dot { fill: var(--primary); }
+.lv-ring { fill: none; stroke: var(--border); stroke-width: 9; }
+.lv-seg { fill: none; stroke-width: 9; }
+.lv-seg-1 { stroke: var(--primary); stroke-dasharray: 40 60; }
+.lv-seg-2 { stroke: var(--foreground); stroke-dasharray: 38 62; stroke-dashoffset: -40; }
+.lv-seg-3 { stroke: var(--chart-2); stroke-dasharray: 22 78; stroke-dashoffset: -78; }
+.lv-sheet-head { fill: var(--visual-surface); stroke: var(--border); }
+.lv-track { stroke: var(--primary); stroke-width: 1; opacity: 0.45; fill: none; }
+.lv-dashed { stroke-dasharray: 3 3; }
+.lv-flow { fill: var(--primary); }
+.lv-brand-fill { fill: var(--primary); }
+.lv-ink-fill { fill: var(--foreground); }
+.lv-line { fill: var(--muted-foreground); fill-opacity: 0.45; }
+.lv-bar { fill: var(--primary); }
+.lv-stamp { fill: var(--primary); }
+.lv-check { fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.lv-envelope { fill: none; stroke: var(--border); stroke-width: 1; }
+.lv-chat-user { font-size: 9px; font-weight: 500; fill: #fff; }
+.lv-chat { font-size: 9px; font-weight: 500; fill: var(--foreground); }
+.lv-avatar { font-size: 7.5px; font-weight: 800; fill: #fff; }
+.lv-cite { fill: var(--accent); stroke: oklch(0.548 0.184 262 / 0.3); stroke-width: 1; }
+.lv-cite-text { font-size: 7px; font-weight: 650; fill: var(--primary); }
+.lv-typing-dot { fill: var(--muted-foreground); }
+
+/* One 7s timeline shared by every preview: steps reveal in order, hold, then reset. */
+.lv-seq, .lv-grow, .lv-draw, .lv-seg, .lv-flow, .lv-typing { animation-duration: 7s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+.lv-s1 { animation-name: lv-s1; } .lv-s2 { animation-name: lv-s2; } .lv-s3 { animation-name: lv-s3; } .lv-s4 { animation-name: lv-s4; }
+.lv-s5 { animation-name: lv-s5; } .lv-s6 { animation-name: lv-s6; } .lv-s7 { animation-name: lv-s7; }
+@keyframes lv-s1 { 0%, 4% { opacity: 0; transform: translateY(5px); } 10%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s2 { 0%, 11% { opacity: 0; transform: translateY(5px); } 17%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s3 { 0%, 18% { opacity: 0; transform: translateY(5px); } 24%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s4 { 0%, 30% { opacity: 0; transform: translateY(5px); } 37%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s5 { 0%, 40% { opacity: 0; transform: translateY(5px); } 47%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s6 { 0%, 55% { opacity: 0; transform: scale(0.4); } 61%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s7 { 0%, 64% { opacity: 0; transform: translateX(-6px); } 71%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+/* Revenue line draws itself */
+.lv-draw { stroke-dasharray: 160; animation-name: lv-draw; }
+@keyframes lv-draw { 0%, 6% { stroke-dashoffset: 160; } 34%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+
+/* Donut segments fill in turn */
+.lv-seg-1 { animation-name: lv-seg1; } .lv-seg-2 { animation-name: lv-seg2; } .lv-seg-3 { animation-name: lv-seg3; }
+@keyframes lv-seg1 { 0%, 48% { stroke-dasharray: 0 100; } 58%, 92% { stroke-dasharray: 40 60; opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-seg2 { 0%, 54% { stroke-dasharray: 0 100; } 64%, 92% { stroke-dasharray: 38 62; opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-seg3 { 0%, 60% { stroke-dasharray: 0 100; } 70%, 92% { stroke-dasharray: 22 78; opacity: 1; } 100% { opacity: 0; } }
+
+/* Report chart bars grow */
+.lv-grow { transform-origin: 50% 100%; }
+.lv-g1 { animation-name: lv-g1; } .lv-g2 { animation-name: lv-g2; } .lv-g3 { animation-name: lv-g3; } .lv-g4 { animation-name: lv-g4; } .lv-g5 { animation-name: lv-g5; }
+@keyframes lv-g1 { 0%, 24% { transform: scaleY(0); } 31%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g2 { 0%, 26% { transform: scaleY(0); } 33%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g3 { 0%, 28% { transform: scaleY(0); } 35%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g4 { 0%, 30% { transform: scaleY(0); } 37%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g5 { 0%, 32% { transform: scaleY(0); } 39%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+
+/* Data flowing from the spreadsheet into the report */
+.lv-flow { animation-name: lv-flow; animation-duration: 1.6s; animation-timing-function: linear; }
+@keyframes lv-flow { from { transform: translateX(0); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } to { transform: translateX(38px); opacity: 0; } }
+
+/* Assistant: typing dots show briefly before the answer */
+.lv-typing { animation-name: lv-typing; }
+@keyframes lv-typing { 0%, 18% { opacity: 0; } 21%, 30% { opacity: 1; } 33%, 100% { opacity: 0; } }
+.lv-typing-dot { animation: lv-bounce 0.9s ease-in-out infinite; }
+.lv-t2 { animation-delay: 0.15s; } .lv-t3 { animation-delay: 0.3s; }
+@keyframes lv-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+
+/* Reduced motion: show the finished frame (no typing dots). */
+@media (prefers-reduced-motion: reduce) { .lv-typing { opacity: 0; } }
