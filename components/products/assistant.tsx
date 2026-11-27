@@ -33,7 +33,7 @@ function AssistantAvatar({ className }: { className?: string }) {
   );
 }
 
-export function PolicyAssistant() {
+export function HrAssistant() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);

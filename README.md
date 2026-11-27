@@ -8,7 +8,7 @@
 | --- | --- | --- | --- | --- |
 | 01 | Data Analytics | Performance Dashboard | `/analytics` | Four KPI cards with sparklines; monthly revenue with a 6-month forecast and 80% range; a revenue-by-channel donut; revenue by region; a gross margin trend; and auto-generated insights. Filters for region and time range. |
 | 02 | Process Automation | Automated Monthly Report | `/reports` | Pick a month and click *Generate*. You get a formatted report with an executive summary, key metrics table, and per-metric commentary covering the current value, year-over-year change, 3-year trend and short-term shift, plus a breakdown and outlook. Prints to PDF. |
-| 03 | AI Implementation | HR Policy Assistant | `/assistant` | A chat assistant that answers only from Northwind's three policy documents (handbook, travel & expenses, IT & security) and cites the exact section. |
+| 03 | AI Implementation | HR Assistant | `/assistant` | A chat assistant that answers only from Northwind's three policy documents (handbook, travel & expenses, IT & security) and cites the exact section. |
 
 Every figure, company and document is **sample data** and is labelled as such in the app.
 
@@ -39,7 +39,7 @@ app/
   site.css               styles ported from erungroup.ca
   analytics/             01 Performance Dashboard
   reports/               02 Automated Monthly Report
-  assistant/             03 HR Policy Assistant
+  assistant/             03 HR Assistant
   api/ai/route.ts        assistant endpoint (server only)
 components/
   site-chrome.tsx        website header, footer and call to action
